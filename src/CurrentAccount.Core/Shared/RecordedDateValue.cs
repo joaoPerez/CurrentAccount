@@ -1,4 +1,5 @@
 ﻿using CurrentAccount.Core.Shared.Result;
+
 namespace CurrentAccount.Core.Shared
 {
 	public record RecordedDateValue

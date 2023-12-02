@@ -1,9 +1,12 @@
-﻿using CurrentAccount.Core.Shared.Result;
+﻿using CurrentAccount.Core.Customer;
+using CurrentAccount.Core.Shared.Result;
 
 namespace CurrentAccount.Core.CurrentAccount
 {
 	public interface ICurrentAccountService
 	{
-		Task<ResultModel<Guid>> CreateNewAccountFromExistentCostumer(Guid customerId, decimal initialCredit);
+		Task<Guid> CreateCurrentAccount(CurrentAccountEntity currentAccount);
+		Task<CurrentAccountEntity> GetLastActiveAccountFromCustomer(CustomerEntity customer);
+		Task<string> CalculateNextAccountNumber();
 	}
 }

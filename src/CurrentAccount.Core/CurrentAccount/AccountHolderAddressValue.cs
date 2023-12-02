@@ -2,5 +2,5 @@
 
 namespace CurrentAccount.Core.CurrentAccount
 {
-    public record AccountHolderAddressValue(NameValue Street, NameValue City, NameValue State, ZipCodeValue ZipCode, NameValue Country);
+    public record AccountHolderAddressValue(NameWithNumValue Street, NameValue City, NameValue State, ZipCodeValue ZipCode, NameValue Country);
 }

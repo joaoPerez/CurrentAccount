@@ -5,4 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CurrentAccount.Core\CurrentAccount.Core.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,9 +1,4 @@
 ﻿using CurrentAccount.Core.Shared.Result;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
 namespace CurrentAccount.Core.Shared
@@ -12,8 +7,7 @@ namespace CurrentAccount.Core.Shared
     {
         private static readonly string _accountNumberErrorMessage = "The provided account number is not valid";
 
-        private static readonly byte _maxAccountNumberSize = 10;
-        private static readonly byte _minAccountNumberSize = 10;
+        public static readonly byte AccountNumberSize = 10;
 
         private static readonly string _regexAccountNumber = @"^\d+(\.\d+)?$";
 
@@ -36,8 +30,7 @@ namespace CurrentAccount.Core.Shared
         private static bool IsValidAccountNumber(string accountNumber)
         {
             if (string.IsNullOrWhiteSpace(accountNumber) ||
-                accountNumber.Length > _maxAccountNumberSize ||
-                accountNumber.Length < _minAccountNumberSize)
+                accountNumber.Length != AccountNumberSize)
             {
                 return false;
             }
