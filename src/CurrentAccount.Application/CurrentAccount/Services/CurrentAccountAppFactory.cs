@@ -6,13 +6,13 @@ using CurrentAccount.Application.CurrentAccount.Dto;
 
 namespace CurrentAccount.Application.CurrentAccount.Services
 {
-    public class CurrentAccountAppService : ICurrentAccountAppService
+    public class CurrentAccountAppFactory : ICurrentAccountAppService
     {
         private readonly CurrentAccountDto _currentAccountDto;
         private readonly CustomerEntity _customerEntity;
 		private readonly Guid _accountUuid;
 
-		public CurrentAccountAppService(Guid accountUuid, CurrentAccountDto currentAccountDto, CustomerEntity customerEntity)
+		public CurrentAccountAppFactory(Guid accountUuid, CurrentAccountDto currentAccountDto, CustomerEntity customerEntity)
         {
             _currentAccountDto = currentAccountDto;
             _customerEntity = customerEntity;

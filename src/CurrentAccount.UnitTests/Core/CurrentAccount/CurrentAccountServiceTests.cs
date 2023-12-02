@@ -26,7 +26,7 @@ namespace CurrentAccount.UnitTests.Core.CurrentAccount
 			_defaultCurrentAccountDto = PopulateCurrentAccountDto();
 			_defaultCustomerEntity = new CustomerEntity(Guid.NewGuid());
 
-			_currentAccountAppService = new CurrentAccountAppService(accountId, _defaultCurrentAccountDto, _defaultCustomerEntity);
+			_currentAccountAppService = new CurrentAccountAppFactory(accountId, _defaultCurrentAccountDto, _defaultCustomerEntity);
 
 			_defaultCurrentAccountEntity = _currentAccountAppService.ToCurrentAccountEntity().Value;
 		}
