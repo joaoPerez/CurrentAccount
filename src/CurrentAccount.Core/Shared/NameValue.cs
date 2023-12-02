@@ -3,11 +3,18 @@ using System.Text.RegularExpressions;
 
 namespace CurrentAccount.Core.Shared
 {
-	public record NameValue(string Name)
+	public record NameValue
 	{
 		private static readonly string _notValidNameMessage = "The provided name is not valid";
 		private static readonly string _regexName = "^(\\b[A-Za-z]*\\b(\\s+\\b[A-Za-z]*\\b)*(\\.[A-Za-z])?)$";
 		private static readonly byte _maxLengthName = 255;
+
+        private NameValue(string name)
+        {
+            Name = name;
+        }
+
+        public string Name { get; private set; }
 
 		public static ResultModel<NameValue> Create(string name)
 		{
