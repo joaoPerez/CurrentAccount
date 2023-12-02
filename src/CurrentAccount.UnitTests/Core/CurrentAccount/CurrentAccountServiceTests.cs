@@ -9,7 +9,7 @@ namespace CurrentAccount.UnitTests.Core.CurrentAccount
 	public class CurrentAccountServiceTests
 	{
 		private readonly ICurrentAccountService _currentAccountService;
-		private readonly ICurrentAccountAppService _currentAccountAppService;
+		private readonly ICurrentAccountAppFactory _currentAccountAppService;
 
 		private readonly Mock<ICurrentAccountRepository> _currentAccountRepositoryMock;
 
@@ -26,15 +26,15 @@ namespace CurrentAccount.UnitTests.Core.CurrentAccount
 			_defaultCurrentAccountDto = PopulateCurrentAccountDto();
 			_defaultCustomerEntity = new CustomerEntity(Guid.NewGuid());
 
-			_currentAccountAppService = new CurrentAccountAppFactory(accountId, _defaultCurrentAccountDto, _defaultCustomerEntity);
+			_currentAccountAppService = new CurrentAccountAppFactory();
 
-			_defaultCurrentAccountEntity = _currentAccountAppService.ToCurrentAccountEntity().Value;
+			_defaultCurrentAccountEntity = _currentAccountAppService.ToCurrentAccountEntity(accountId, _defaultCurrentAccountDto, _defaultCustomerEntity).Value;
 		}
 
         [Fact]
 		public async Task CreateCurrentAccount_RightData_ShouldReturnAccountId()
 		{
-			var currentAccount = _currentAccountAppService.ToCurrentAccountEntity();
+			var currentAccount = _currentAccountAppService.ToCurrentAccountEntity(Guid.NewGuid(), _defaultCurrentAccountDto, _defaultCustomerEntity);
 
 			_currentAccountRepositoryMock
 				.Setup(repo => repo.CreateCurrentAccount(It.IsAny<CurrentAccountEntity>()))
