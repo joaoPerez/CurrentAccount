@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CurrentAccount.Core\CurrentAccount.Core.csproj" />
   </ItemGroup>
 

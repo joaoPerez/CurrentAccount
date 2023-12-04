@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CurrentAccount.Application\CurrentAccount.Application.csproj" />
     <ProjectReference Include="..\CurrentAccount.Core\CurrentAccount.Core.csproj" />
+    <ProjectReference Include="..\CurrentAccount.Infrastructure\CurrentAccount.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

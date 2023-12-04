@@ -1,19 +1,21 @@
 ﻿using Moq;
 using FluentAssertions;
 using CurrentAccount.Core.Customer;
-using CurrentAccount.Application.CurrentAccount.Dto;
 using CurrentAccount.Application.CurrentAccount.Services;
+using CurrentAccount.Core.Shared.Result;
+using CurrentAccount.Infrastructure.Database.Models.CurrentAccount;
+using CurrentAccount.Infrastructure.Database.Models;
 
 namespace CurrentAccount.UnitTests.Core.CurrentAccount
 {
 	public class CurrentAccountServiceTests
 	{
 		private readonly ICurrentAccountService _currentAccountService;
-		private readonly ICurrentAccountAppFactory _currentAccountAppService;
+		private readonly ICurrentAccountInfraFactory _currentAccountInfraFactory;
 
 		private readonly Mock<ICurrentAccountRepository> _currentAccountRepositoryMock;
 
-		private readonly CurrentAccountDto _defaultCurrentAccountDto;
+		private readonly CurrentAccountDataModel _defaultCurrentAccountDataModel;
 		private readonly CustomerEntity _defaultCustomerEntity;
 		private readonly CurrentAccountEntity _defaultCurrentAccountEntity;
 
@@ -23,24 +25,22 @@ namespace CurrentAccount.UnitTests.Core.CurrentAccount
 			_currentAccountService = new CurrentAccountService(_currentAccountRepositoryMock.Object);
 
 			Guid accountId = Guid.NewGuid();
-			_defaultCurrentAccountDto = PopulateCurrentAccountDto();
+			_defaultCurrentAccountDataModel = PopulateCurrentAccountDataModel();
 			_defaultCustomerEntity = new CustomerEntity(Guid.NewGuid());
 
-			_currentAccountAppService = new CurrentAccountAppFactory();
+			_currentAccountInfraFactory = new CurrentAccountInfraFactory();
 
-			_defaultCurrentAccountEntity = _currentAccountAppService.ToCurrentAccountEntity(accountId, _defaultCurrentAccountDto, _defaultCustomerEntity).Value;
+			_defaultCurrentAccountEntity = _currentAccountInfraFactory.ToCurrentAccountEntity(_defaultCurrentAccountDataModel).Value;
 		}
 
         [Fact]
 		public async Task CreateCurrentAccount_RightData_ShouldReturnAccountId()
 		{
-			var currentAccount = _currentAccountAppService.ToCurrentAccountEntity(Guid.NewGuid(), _defaultCurrentAccountDto, _defaultCustomerEntity);
-
 			_currentAccountRepositoryMock
 				.Setup(repo => repo.CreateCurrentAccount(It.IsAny<CurrentAccountEntity>()))
 				.ReturnsAsync(Guid.NewGuid());
 
-			var result = await _currentAccountService.CreateCurrentAccount(currentAccount.Value);
+			var result = await _currentAccountService.CreateCurrentAccount(_defaultCurrentAccountEntity);
 
 			result.Should().NotBeEmpty();
 		}
@@ -65,36 +65,57 @@ namespace CurrentAccount.UnitTests.Core.CurrentAccount
 		{
 			var customer = _defaultCustomerEntity;
 			var currentAccount = _defaultCurrentAccountEntity;
+			var resultCustomer = ResultModel<CurrentAccountEntity>.Success(currentAccount);
 
 			_currentAccountRepositoryMock
 				.Setup(repo => repo.GetLastActiveAccountFromCustomer(It.IsAny<CustomerEntity>()))
-				.ReturnsAsync(currentAccount);
+				.ReturnsAsync(resultCustomer);
 
 			var result = await _currentAccountService.GetLastActiveAccountFromCustomer(customer);
 
 			result.Should().NotBeNull();
 		}
 
-		private static CurrentAccountDto PopulateCurrentAccountDto()
+		private static CurrentAccountDataModel PopulateCurrentAccountDataModel()
 		{
-			return new CurrentAccountDto
+			var customerId = Guid.NewGuid();
+			var contactInfoId = Guid.NewGuid();
+			var accountHolderAddressId = Guid.NewGuid();
+
+			return new CurrentAccountDataModel
 			{
-				AccountNumber = "0123456789",
+				Id = Guid.NewGuid(),
 				AccountDigit = 0,
-				AccountType = AccountTypeEnum.Individual,
-				Balance = 1000.50m,
-				Currency = "USD",
-				Country = "Country",
-				Street = "111 Street",
-				City = "City",
-				State = "State",
-				ZipCode = "12345",
-				CountryCode = "55",
-				PhoneNumber = "55555555",
-				Email = "example@email.com",
+				AccountHolderAddressId = accountHolderAddressId,
+				AccountHolderAddress = new AccountHolderAddressDataModel
+				{
+					Id = Guid.NewGuid(),
+					City = "test city",
+					Country = "test country",
+					State = "test state",
+					Street = "street test",
+					ZipCode = "111111"
+				},
+				AccountNumber = "0123456789",
+				AccountType = Enum.GetName(AccountTypeEnum.Business),
 				IsActive = true,
+				Balance = 1000.50m,
+				ContactInfoId = contactInfoId,
+				ContactInfo = new ContactInformationDataModel
+				{
+					Id = Guid.NewGuid(),
+					Email = "test@email.com",
+					PhoneNumber = "555555555",
+				},
 				CreationDate = DateTime.Now,
-				ClosingDate = null
+				Currency = "USD",
+				CustomerId = customerId,
+				Customer = new Infrastructure.Database.Models.Customer.IndividualCustomerDataModel
+				{
+					CustomerId = Guid.Parse("3fa85f64-5717-4562-b3fc-2c963f66afa6"),
+					FirstName = "first name",
+					LastName = "last name",
+				}
 			};
 		}
 	}

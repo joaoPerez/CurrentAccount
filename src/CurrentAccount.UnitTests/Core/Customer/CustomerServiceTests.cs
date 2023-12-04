@@ -1,5 +1,6 @@
 ﻿using CurrentAccount.Application.Customer;
 using CurrentAccount.Core.Customer;
+using CurrentAccount.Core.Shared.Result;
 using Moq;
 
 namespace CurrentAccount.UnitTests.Core.Customer
@@ -32,16 +33,17 @@ namespace CurrentAccount.UnitTests.Core.Customer
 		public async Task GetCustomerById_ValidData_ShouldReturnCustomerEntity()
 		{
 			var customerId = Guid.NewGuid();
-			var mockCustomerEntity = new CustomerEntity(customerId);
+			var customerEntity = new CustomerEntity(customerId);
+			var customerResult = ResultModel<CustomerEntity>.Success(customerEntity);
 
 			_customerRepositoryMock.Setup(repo => repo.GetCustomerById(customerId))
-				.ReturnsAsync(mockCustomerEntity);
+				.ReturnsAsync(customerResult);
 
 			var result = await _customerService.GetCustomerById(customerId);
 
 			Assert.NotNull(result);
-			Assert.IsType<CustomerEntity>(result);
-			Assert.Equal(customerId, result.CustomerId);
+			Assert.IsType<CustomerEntity>(result.Value);
+			Assert.Equal(customerId, result.Value.CustomerId);
 		}
 
 		[Fact]
