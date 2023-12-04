@@ -6,6 +6,8 @@
     <UserSecretsId>2ce2a094-be2b-425a-8c6b-ed76de4fd570</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <BaseOutputPath>C:\Projects\CurrentAccount\src\CurrentAccount\CurrentAccount.API\bin</BaseOutputPath>
+    <BaseIntermediateOutputPath>C:\Projects\CurrentAccount\src\CurrentAccount\CurrentAccount.API\obj</BaseIntermediateOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
