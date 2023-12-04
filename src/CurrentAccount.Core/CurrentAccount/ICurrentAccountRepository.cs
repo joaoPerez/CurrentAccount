@@ -1,4 +1,5 @@
 ﻿using CurrentAccount.Core.Customer;
+using CurrentAccount.Core.Shared.Result;
 
 namespace CurrentAccount.Core.CurrentAccount
 {
@@ -6,6 +7,6 @@ namespace CurrentAccount.Core.CurrentAccount
 	{
 		Task<Guid> CreateCurrentAccount(CurrentAccountEntity currentAccountEntity);
 		Task<string> GetLastCreatedAccountNumber();
-		Task<CurrentAccountEntity> GetLastActiveAccountFromCustomer(CustomerEntity customer);
+		Task<ResultModel<CurrentAccountEntity>> GetLastActiveAccountFromCustomer(CustomerEntity customer);
 	}
 }

@@ -24,7 +24,7 @@ namespace CurrentAccount.Application.CurrentAccount.Handlers
             // Get customer from CustomerId
             var existentCustomer = await _customerService.GetCustomerById(command.CustomerId);
 
-            if (existentCustomer == null)
+            if (!existentCustomer.IsSuccess || existentCustomer.Value == null)
             {
                 return ResultModel<Guid>.Failure(_creatingAccountErrorMessage);
             }
@@ -32,9 +32,14 @@ namespace CurrentAccount.Application.CurrentAccount.Handlers
             // Because I do not have much of the business rules involved and I am receiving only a few parameters
             // I will create the new account based on the last account created for the same customer and with the same type (Businness, Individual)
 
-            var customerLastCurrentAccount = await _currentAccountService.GetLastActiveAccountFromCustomer(existentCustomer);
+            var customerLastCurrentAccount = await _currentAccountService.GetLastActiveAccountFromCustomer(existentCustomer.Value);
 
-            var currentAccountModified = customerLastCurrentAccount;
+            if(!customerLastCurrentAccount.IsSuccess || customerLastCurrentAccount.Value == null)
+            {
+                return ResultModel<Guid>.Failure(_creatingAccountErrorMessage);
+            }
+
+            var currentAccountModified = customerLastCurrentAccount.Value;
 
             // Set the new account number
             var newAccountNumber = await _currentAccountService.CalculateNextAccountNumber();
@@ -52,7 +57,7 @@ namespace CurrentAccount.Application.CurrentAccount.Handlers
             currentAccountModified.Customer.SetCustomerId(newAccountUuid);
 
             // Create account
-            var customerId = await _currentAccountService.CreateCurrentAccount(customerLastCurrentAccount);
+            var customerId = await _currentAccountService.CreateCurrentAccount(currentAccountModified);
 
             return ResultModel<Guid>.Success(customerId);
         }

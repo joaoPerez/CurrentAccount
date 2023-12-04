@@ -1,6 +1,7 @@
 ﻿using CurrentAccount.Core.CurrentAccount;
 using CurrentAccount.Core.Customer;
 using CurrentAccount.Core.Shared;
+using CurrentAccount.Core.Shared.Result;
 
 namespace CurrentAccount.Application.CurrentAccount.Services
 {
@@ -13,9 +14,9 @@ namespace CurrentAccount.Application.CurrentAccount.Services
             _currentAccountRepository = currentAccountRepository;
         }
 
-        public async Task<Guid> CreateCurrentAccount(CurrentAccountEntity currentAccount)
+        public Task<Guid> CreateCurrentAccount(CurrentAccountEntity currentAccount)
         {
-            return await _currentAccountRepository.CreateCurrentAccount(currentAccount);
+            return _currentAccountRepository.CreateCurrentAccount(currentAccount);
         }
 
         // Simplifying the way to create an account number for this example code.
@@ -31,14 +32,14 @@ namespace CurrentAccount.Application.CurrentAccount.Services
             return nextAccountNumber.ToString().PadLeft(AccountNumberValue.AccountNumberSize, '0');
         }
 
-        public async Task<CurrentAccountEntity> GetLastActiveAccountFromCustomer(CustomerEntity customer)
+        public Task<ResultModel<CurrentAccountEntity>> GetLastActiveAccountFromCustomer(CustomerEntity customer)
         {
-            return await _currentAccountRepository.GetLastActiveAccountFromCustomer(customer);
+            return _currentAccountRepository.GetLastActiveAccountFromCustomer(customer);
         }
 
-        private async Task<string> GetLastCreatedAccountNumberOfAllClients()
+        private Task<string> GetLastCreatedAccountNumberOfAllClients()
         {
-            return await _currentAccountRepository.GetLastCreatedAccountNumber();
+            return _currentAccountRepository.GetLastCreatedAccountNumber();
         }
     }
 }

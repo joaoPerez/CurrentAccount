@@ -2,5 +2,5 @@
 
 namespace CurrentAccount.Core.CurrentAccount
 {
-    public record ContactInformationValue(PhoneNumberValue PhoneNumber, EmailAddressValue Email);
+    public record ContactInformationValue(Guid Id, PhoneNumberValue PhoneNumber, EmailAddressValue Email);
 }

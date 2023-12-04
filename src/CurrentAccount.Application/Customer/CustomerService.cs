@@ -1,4 +1,5 @@
 ﻿using CurrentAccount.Core.Customer;
+using CurrentAccount.Core.Shared.Result;
 
 namespace CurrentAccount.Application.Customer
 {
@@ -16,7 +17,7 @@ namespace CurrentAccount.Application.Customer
 			return _customerRepository.CreateCustomer(customer);
 		}
 
-		public Task<CustomerEntity> GetCustomerById(Guid customerId)
+		public Task<ResultModel<CustomerEntity>> GetCustomerById(Guid customerId)
 		{
 			return _customerRepository.GetCustomerById(customerId);
 		}

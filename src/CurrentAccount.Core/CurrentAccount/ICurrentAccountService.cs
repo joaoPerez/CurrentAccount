@@ -6,7 +6,7 @@ namespace CurrentAccount.Core.CurrentAccount
 	public interface ICurrentAccountService
 	{
 		Task<Guid> CreateCurrentAccount(CurrentAccountEntity currentAccount);
-		Task<CurrentAccountEntity> GetLastActiveAccountFromCustomer(CustomerEntity customer);
+		Task<ResultModel<CurrentAccountEntity>> GetLastActiveAccountFromCustomer(CustomerEntity customer);
 		Task<string> CalculateNextAccountNumber();
 	}
 }
