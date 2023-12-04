@@ -1,10 +1,10 @@
-using CurrentAccount.Application.CurrentAccount;
 using CurrentAccount.Application.CurrentAccount.Handlers;
+using CurrentAccount.Application.CurrentAccounts.Commands;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CurrentAccount.API.Controllers
 {
-	[ApiController]
+    [ApiController]
 	[Route("[controller]")]
 	public class CurrentAccountController : ControllerBase
 	{

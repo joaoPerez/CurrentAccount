@@ -1,4 +1,5 @@
-﻿using CurrentAccount.Core.CurrentAccount;
+﻿using CurrentAccount.Application.CurrentAccounts.Commands;
+using CurrentAccount.Core.CurrentAccount;
 using CurrentAccount.Core.Customer;
 using CurrentAccount.Core.Shared;
 using CurrentAccount.Core.Shared.Result;

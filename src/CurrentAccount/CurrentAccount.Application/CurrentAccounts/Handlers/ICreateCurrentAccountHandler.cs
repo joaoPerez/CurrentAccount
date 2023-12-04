@@ -1,4 +1,5 @@
-﻿using CurrentAccount.Core.Shared.Result;
+﻿using CurrentAccount.Application.CurrentAccounts.Commands;
+using CurrentAccount.Core.Shared.Result;
 
 namespace CurrentAccount.Application.CurrentAccount.Handlers
 {
