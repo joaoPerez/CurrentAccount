@@ -5,4 +5,9 @@ services:
     image: ${DOCKER_REGISTRY-}currentaccountapi
     build:
       context: .
-      dockerfile: CurrentAccount.API/Dockerfile
+      dockerfile: CurrentAccount/CurrentAccount.API/Dockerfile
+  currentaccount.transaction.api:
+    image: ${DOCKER_REGISTRY-}currentaccounttransactionapi
+    build:
+      context: .
+      dockerfile: Transaction/CurrentAccount.Transaction.API/Dockerfile
