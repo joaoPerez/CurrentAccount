@@ -5,19 +5,25 @@ namespace CurrentAccount.Transaction.Application.Transactions
 {
 	public class TransactionService : ITransactionService
 	{
-		public Task<Guid> CreateTransaction(TransactionEntity transaction)
+		private readonly ITransactionRepository _transactionRepository;
+        public TransactionService(ITransactionRepository transactionRepository)
+        {
+            _transactionRepository = transactionRepository;
+        }
+
+        public Task<Guid> CreateTransaction(TransactionEntity transaction)
 		{
-			throw new NotImplementedException();
+			return _transactionRepository.CreateTransaction(transaction);
 		}
 
 		public Task<ResultModel<List<TransactionEntity>>> GetAllTransactionsFromAccount(Guid accountId)
 		{
-			throw new NotImplementedException();
+			return _transactionRepository.GetAllTransactionsFromAccount(accountId);
 		}
 
 		public Task<decimal> GetLastBalanceFromAccount(Guid accountId)
 		{
-			throw new NotImplementedException();
+			return _transactionRepository.GetLastBalanceFromAccount(accountId);
 		}
 	}
 }
