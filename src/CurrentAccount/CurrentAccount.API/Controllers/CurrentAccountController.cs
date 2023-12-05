@@ -8,9 +8,9 @@ namespace CurrentAccount.API.Controllers
 	[Route("[controller]")]
 	public class CurrentAccountController : ControllerBase
 	{
-		private readonly ILogger<HealthCheckController> _logger;
+		private readonly ILogger<CurrentAccountController> _logger;
 		private readonly ICreateCurrentAccountHandler _createCurrentAccountHandler;
-		public CurrentAccountController(ILogger<HealthCheckController> logger, ICreateCurrentAccountHandler createCurrentAccountHandler)
+		public CurrentAccountController(ILogger<CurrentAccountController> logger, ICreateCurrentAccountHandler createCurrentAccountHandler)
 		{
 			_logger = logger;
 			_createCurrentAccountHandler = createCurrentAccountHandler;
