@@ -1,8 +1,12 @@
-﻿namespace CurrentAccount.Infrastructure.Database.Models.Customer
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CurrentAccount.Infrastructure.Database.Models.Customer
 {
     public class IndividualCustomerDataModel : CustomerDataModel
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+		[MaxLength(255)]
+		public string FirstName { get; set; }
+		[MaxLength(255)]
+		public string LastName { get; set; }
     }
 }

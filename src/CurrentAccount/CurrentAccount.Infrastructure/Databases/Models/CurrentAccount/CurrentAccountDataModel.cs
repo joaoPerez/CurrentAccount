@@ -10,20 +10,23 @@ namespace CurrentAccount.Infrastructure.Database.Models.CurrentAccount
         public Guid Id { get; set; }
 
         [Required]
-        public string AccountNumber { get; set; }
+		[MaxLength(50)]
+		public string AccountNumber { get; set; }
 
         [Required]
         public byte AccountDigit { get; set; }
 
         [Required]
-        public string AccountType { get; set; }
+		[MaxLength(50)]
+		public string AccountType { get; set; }
 
         [Column(TypeName = "decimal(6,2)")]
         [Required]
         public decimal Balance { get; set; } = 0;
 
         [Required]
-        public string Currency { get; set; }
+		[MaxLength(50)]
+		public string Currency { get; set; }
 
         [Required]
         public bool IsActive { get; set; } = true;
