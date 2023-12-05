@@ -6,7 +6,7 @@ namespace CurrentAccount.Transaction.Core.Transactions
 	{
 		public TransactionEntity(Guid transactionId,
 								 Guid accountId,
-								 RecordedDateValue transactionDateTime,
+								 RecordedDateValue transactionDate,
 								 TransactionTypeEnum type,
 								 DecimalNumberValue amount,
 								 NameValue description,
@@ -15,7 +15,7 @@ namespace CurrentAccount.Transaction.Core.Transactions
 		{
 			TransactionId = transactionId;
 			AccountId = accountId;
-			TransactionDate = transactionDateTime;
+			TransactionDate = transactionDate;
 			Type = type;
 			Amount = amount;
 			Description = description;
