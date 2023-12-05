@@ -11,9 +11,14 @@ namespace CurrentAccount.Transaction.Application.Transactions.Services
             _transactionRepository = transactionRepository;
         }
 
-        public Task<Guid> CreateTransaction(TransactionEntity transaction)
+        public async Task<ResultModel<Guid>> CreateTransaction(TransactionEntity transaction)
         {
-            return _transactionRepository.CreateTransaction(transaction);
+            var _createTransactionErrorMessage = "The transaction could not be created";
+            var result = await _transactionRepository.CreateTransaction(transaction);
+
+            if(result.Equals(Guid.Empty)) { return ResultModel<Guid>.Failure(_createTransactionErrorMessage); }
+
+            return ResultModel<Guid>.Success(result);
         }
 
         public Task<ResultModel<List<TransactionEntity>>> GetAllTransactionsFromAccount(Guid accountId)

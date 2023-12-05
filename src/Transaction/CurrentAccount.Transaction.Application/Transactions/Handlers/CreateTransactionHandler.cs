@@ -27,9 +27,7 @@ namespace CurrentAccount.Transaction.Application.Transactions.Handlers
 				return ResultModel<Guid>.Failure(transactionEntity.ErrorMessage);
 			}
 
-			var transactionResult = await _transactionService.CreateTransaction(transactionEntity.Value);
-
-			return ResultModel<Guid>.Success(transactionResult);
+			return await _transactionService.CreateTransaction(transactionEntity.Value);
 		}
 
 		private static ResultModel<TransactionEntity> FromCommandToEntity(CreateTransactionCommand command, decimal actualBalanceResult)
@@ -37,7 +35,7 @@ namespace CurrentAccount.Transaction.Application.Transactions.Handlers
 			var transactionId = Guid.NewGuid();
 			var accountUuid = command.accountId;
 
-			var transactionDate = RecordedDateValue.Create(DateTime.Now.ToUniversalTime());
+			var transactionDate = RecordedDateValue.Create(DateTime.Now);
 
 			if (!transactionDate.IsSuccess)
 			{
@@ -91,7 +89,7 @@ namespace CurrentAccount.Transaction.Application.Transactions.Handlers
 														  transactionDate.Value,
 														  transactionType.Value,
 														  amount.Value,
-														  description.Value,
+														  description?.Value,
 														  actualBalance.Value,
 														  currency.Value
 				);

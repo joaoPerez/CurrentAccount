@@ -1,6 +1,6 @@
 ﻿using CurrentAccount.Core.Shared;
 using CurrentAccount.Core.Shared.Result;
-using CurrentAccount.Transaction.Application.Transactions;
+using CurrentAccount.Transaction.Application.Transactions.Services;
 using CurrentAccount.Transaction.Core.Transactions;
 using Moq;
 
@@ -10,7 +10,7 @@ namespace CurrentAccount.Transaction.UnitTests.Core.Transactions
 	{
 		private readonly ITransactionService _transactionService;
 		private readonly Mock<ITransactionRepository> _transactionRepositoryMock;
-		private TransactionEntity _transactionEntity;
+		private readonly TransactionEntity _transactionEntity;
 
 		public TransactionServiceTests()
         {
@@ -45,7 +45,7 @@ namespace CurrentAccount.Transaction.UnitTests.Core.Transactions
 
 			var result = await _transactionService.CreateTransaction(_transactionEntity);
 
-			Assert.Equal(expectedTransactionUuid, result);
+			Assert.Equal(expectedTransactionUuid, result.Value);
 		}
 
 		[Fact]
