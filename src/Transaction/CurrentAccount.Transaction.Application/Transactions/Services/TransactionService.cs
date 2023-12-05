@@ -5,7 +5,11 @@ namespace CurrentAccount.Transaction.Application.Transactions.Services
 {
     public class TransactionService : ITransactionService
     {
-        private readonly ITransactionRepository _transactionRepository;
+        private readonly string _createTransactionErrorMessage = "The transaction could not be created";
+        private readonly string _accountIdInvalidErrorMessage = "Account ID must be informed";
+
+		private readonly ITransactionRepository _transactionRepository;
+
         public TransactionService(ITransactionRepository transactionRepository)
         {
             _transactionRepository = transactionRepository;
@@ -13,7 +17,6 @@ namespace CurrentAccount.Transaction.Application.Transactions.Services
 
         public async Task<ResultModel<Guid>> CreateTransaction(TransactionEntity transaction)
         {
-            var _createTransactionErrorMessage = "The transaction could not be created";
             var result = await _transactionRepository.CreateTransaction(transaction);
 
             if(result.Equals(Guid.Empty)) { return ResultModel<Guid>.Failure(_createTransactionErrorMessage); }
@@ -23,6 +26,8 @@ namespace CurrentAccount.Transaction.Application.Transactions.Services
 
         public Task<ResultModel<List<TransactionEntity>>> GetAllTransactionsFromAccount(Guid accountId)
         {
+            if(accountId == Guid.Empty) { return Task.FromResult(ResultModel<List<TransactionEntity>>.Failure(_accountIdInvalidErrorMessage)); }
+
             return _transactionRepository.GetAllTransactionsFromAccount(accountId);
         }
 

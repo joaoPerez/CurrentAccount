@@ -10,8 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.14" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CurrentAccount.Transaction.Application\CurrentAccount.Transaction.Application.csproj" />
+    <ProjectReference Include="..\CurrentAccount.Transaction.Infrastructure\CurrentAccount.Transaction.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
