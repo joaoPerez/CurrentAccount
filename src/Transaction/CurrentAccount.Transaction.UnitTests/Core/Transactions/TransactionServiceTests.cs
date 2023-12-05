@@ -62,7 +62,7 @@ namespace CurrentAccount.Transaction.UnitTests.Core.Transactions
 			_transactionRepositoryMock.Setup(repo => repo.GetAllTransactionsFromAccount(accountId))
 						  .ReturnsAsync(expectedData);
 
-			var result = await _transactionService.GetAllTransactionsFromAccount(accountId);
+			var result = await _transactionService.GetTransactionsFromAccount(accountId);
 
 			Assert.NotNull(result);
 			Assert.Equal(expectedData.Value, result.Value);

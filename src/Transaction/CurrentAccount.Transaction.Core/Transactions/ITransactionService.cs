@@ -6,6 +6,6 @@ namespace CurrentAccount.Transaction.Core.Transactions
 	{
 		Task<ResultModel<Guid>> CreateTransaction(TransactionEntity transaction);
 		Task<decimal> GetLastBalanceFromAccount(Guid accountId);
-		Task<ResultModel<List<TransactionEntity>>> GetAllTransactionsFromAccount(Guid accountId);
+		Task<ResultModel<List<TransactionEntity>>> GetTransactionsFromAccount(Guid accountId);
 	}
 }

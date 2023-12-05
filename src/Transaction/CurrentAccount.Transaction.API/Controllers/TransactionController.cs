@@ -24,8 +24,7 @@ namespace CurrentAccount.Transaction.API.Controllers
 		[Route("GetTransactionsFromAccount")]
 		public async Task<IActionResult> GetAllTransactionsByAccountAsync(Guid accountId)
 		{
-
-			var transactionsResult = await _transactionService.GetAllTransactionsFromAccount(accountId);
+			var transactionsResult = await _transactionService.GetTransactionsFromAccount(accountId);
 
 			if(!transactionsResult.IsSuccess)
 			{

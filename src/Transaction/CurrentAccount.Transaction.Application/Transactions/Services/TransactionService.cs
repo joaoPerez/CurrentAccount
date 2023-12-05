@@ -42,7 +42,7 @@ namespace CurrentAccount.Transaction.Application.Transactions.Services
 			}
         }
 
-        public Task<ResultModel<List<TransactionEntity>>> GetAllTransactionsFromAccount(Guid accountId)
+        public Task<ResultModel<List<TransactionEntity>>> GetTransactionsFromAccount(Guid accountId)
         {
             if(accountId == Guid.Empty) { return Task.FromResult(ResultModel<List<TransactionEntity>>.Failure(_accountIdInvalidErrorMessage)); }
 
