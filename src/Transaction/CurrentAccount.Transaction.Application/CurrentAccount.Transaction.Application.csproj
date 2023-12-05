@@ -10,8 +10,4 @@
     <ProjectReference Include="..\CurrentAccount.Transaction.Core\CurrentAccount.Transaction.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Transactions\Handlers\" />
-  </ItemGroup>
-
 </Project>
