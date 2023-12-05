@@ -8,6 +8,7 @@
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     <BaseOutputPath>C:\Projects\CurrentAccount\src\CurrentAccount\CurrentAccount.API\bin</BaseOutputPath>
     <BaseIntermediateOutputPath>C:\Projects\CurrentAccount\src\CurrentAccount\CurrentAccount.API\obj</BaseIntermediateOutputPath>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>

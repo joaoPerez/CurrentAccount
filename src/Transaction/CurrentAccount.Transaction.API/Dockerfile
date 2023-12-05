@@ -2,12 +2,16 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
-EXPOSE 80
+EXPOSE 9090
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["Transaction/CurrentAccount.Transaction.API/CurrentAccount.Transaction.API.csproj", "Transaction/CurrentAccount.Transaction.API/"]
+COPY ["Transaction/CurrentAccount.Transaction.Application/CurrentAccount.Transaction.Application.csproj", "Transaction/CurrentAccount.Transaction.Application/"]
+COPY ["Transaction/CurrentAccount.Transaction.Core/CurrentAccount.Transaction.Core.csproj", "Transaction/CurrentAccount.Transaction.Core/"]
+COPY ["Shared/CurrentAccount.Core.Shared/CurrentAccount.Core.Shared.csproj", "Shared/CurrentAccount.Core.Shared/"]
+COPY ["Transaction/CurrentAccount.Transaction.Infrastructure/CurrentAccount.Transaction.Infrastructure.csproj", "Transaction/CurrentAccount.Transaction.Infrastructure/"]
 RUN dotnet restore "Transaction/CurrentAccount.Transaction.API/CurrentAccount.Transaction.API.csproj"
 COPY . .
 WORKDIR "/src/Transaction/CurrentAccount.Transaction.API"

@@ -2,15 +2,19 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
-EXPOSE 80
+EXPOSE 8080
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["CurrentAccount.API/CurrentAccount.API.csproj", "CurrentAccount.API/"]
-RUN dotnet restore "CurrentAccount.API/CurrentAccount.API.csproj"
+COPY ["CurrentAccount/CurrentAccount.API/CurrentAccount.API.csproj", "CurrentAccount/CurrentAccount.API/"]
+COPY ["CurrentAccount/CurrentAccount.Application/CurrentAccount.Application.csproj", "CurrentAccount/CurrentAccount.Application/"]
+COPY ["CurrentAccount/CurrentAccount.Core/CurrentAccount.Core.csproj", "CurrentAccount/CurrentAccount.Core/"]
+COPY ["Shared/CurrentAccount.Core.Shared/CurrentAccount.Core.Shared.csproj", "Shared/CurrentAccount.Core.Shared/"]
+COPY ["CurrentAccount/CurrentAccount.Infrastructure/CurrentAccount.Infrastructure.csproj", "CurrentAccount/CurrentAccount.Infrastructure/"]
+RUN dotnet restore "CurrentAccount/CurrentAccount.API/CurrentAccount.API.csproj"
 COPY . .
-WORKDIR "/src/CurrentAccount.API"
+WORKDIR "/src/CurrentAccount/CurrentAccount.API"
 RUN dotnet build "CurrentAccount.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
