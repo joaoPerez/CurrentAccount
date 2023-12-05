@@ -18,9 +18,11 @@ namespace CurrentAccount.Transaction.Application.Transactions.Handlers
 
         public async Task<ResultModel<Guid>> HandleCreateTransaction(CreateTransactionCommand command)
 		{
-			var actualBalanceResult = await _transactionService.GetLastBalanceFromAccount(command.accountId);
+			var lastBalance = await _transactionService.GetLastBalanceFromAccount(command.accountId);
 
-			var transactionEntity = FromCommandToEntity(command, actualBalanceResult);
+			var actualBalance = lastBalance + command.amount;
+
+			var transactionEntity = FromCommandToEntity(command, actualBalance);
 
 			if(!transactionEntity.IsSuccess) 
 			{
