@@ -38,7 +38,7 @@ namespace CurrentAccount.Transaction.API.Controllers
 
 		[HttpPost]
 		[Route("CreateTransaction")]
-		public async Task<IActionResult> Post([FromBody] CreateTransactionCommand command)
+		public async Task<IActionResult> CreateTransaction([FromBody] CreateTransactionCommand command)
 		{
 			var result = await _createTransactionHandler.HandleCreateTransaction(command);
 

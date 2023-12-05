@@ -1,4 +1,5 @@
 ﻿using CurrentAccount.Core.Shared;
+using CurrentAccount.Core.Shared.Result;
 
 namespace CurrentAccount.Transaction.Core.Transactions
 {
@@ -31,5 +32,16 @@ namespace CurrentAccount.Transaction.Core.Transactions
 		public NameValue Description { get; private set; }
 		public DecimalNumberValue ActualBalance { get; private set; }
 		public CurrencyValue Currency { get; private set; }
+
+		public ResultModel<DecimalNumberValue> SetBalance(decimal balance)
+		{
+			var balanceResult = DecimalNumberValue.Create(balance);
+
+			if (!balanceResult.IsSuccess) { return balanceResult; }
+
+			ActualBalance = balanceResult.Value;
+
+			return balanceResult;
+		}
 	}
 }

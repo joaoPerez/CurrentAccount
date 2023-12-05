@@ -20,9 +20,7 @@ namespace CurrentAccount.Transaction.Application.Transactions.Handlers
 		{
 			var lastBalance = await _transactionService.GetLastBalanceFromAccount(command.accountId);
 
-			var actualBalance = lastBalance + command.amount;
-
-			var transactionEntity = FromCommandToEntity(command, actualBalance);
+			var transactionEntity = FromCommandToEntity(command, lastBalance);
 
 			if(!transactionEntity.IsSuccess) 
 			{
