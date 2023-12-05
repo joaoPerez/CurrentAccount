@@ -10,6 +10,7 @@ namespace CurrentAccount.API.Controllers
 	{
 		private readonly ILogger<CurrentAccountController> _logger;
 		private readonly ICreateCurrentAccountHandler _createCurrentAccountHandler;
+
 		public CurrentAccountController(ILogger<CurrentAccountController> logger, ICreateCurrentAccountHandler createCurrentAccountHandler)
 		{
 			_logger = logger;
@@ -24,6 +25,7 @@ namespace CurrentAccount.API.Controllers
 
 			if (!result.IsSuccess)
 			{
+				_logger.LogError(result.ErrorMessage);
 				return BadRequest(result.ErrorMessage);
 			}
 
