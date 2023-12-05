@@ -1,11 +1,11 @@
-﻿using CurrentAccount.Application.CurrentAccount.Dto;
-using CurrentAccount.Application.CurrentAccount.Handlers;
+﻿using CurrentAccount.Application.CurrentAccount.Handlers;
 using CurrentAccount.Application.CurrentAccount.Services;
 using CurrentAccount.Core.Customer;
 using CurrentAccount.Infrastructure.Database.Models.CurrentAccount;
 using CurrentAccount.Infrastructure.Database.Models;
 using Moq;
 using CurrentAccount.Core.Shared.Result;
+using CurrentAccount.Application.CurrentAccounts.Commands;
 
 namespace CurrentAccount.UnitTests.Application.Handlers
 {
