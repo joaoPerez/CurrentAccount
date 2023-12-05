@@ -25,7 +25,7 @@ namespace CurrentAccount.API.Controllers
 
 			if (!result.IsSuccess)
 			{
-				_logger.LogError(result.ErrorMessage);
+				_logger.LogError(result.ErrorMessage, result);
 				return BadRequest(result.ErrorMessage);
 			}
 
