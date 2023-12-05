@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CurrentAccount.Transaction.Infrastructure.Databases.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CurrentAccount.Transaction.Infrastructure.Databases.Contexts
 {
@@ -9,6 +10,6 @@ namespace CurrentAccount.Transaction.Infrastructure.Databases.Contexts
 		{
 		}
 
-
+		public DbSet<TransactionDataModel> Transactions { get; set; } = null;
 	}
 }

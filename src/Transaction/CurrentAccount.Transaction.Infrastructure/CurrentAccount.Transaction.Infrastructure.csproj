@@ -6,12 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Databases\Factories\" />
-    <Folder Include="Databases\Repository\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
+    <ProjectReference Include="..\..\Shared\CurrentAccount.Core.Shared\CurrentAccount.Core.Shared.csproj" />
+    <ProjectReference Include="..\CurrentAccount.Transaction.Core\CurrentAccount.Transaction.Core.csproj" />
   </ItemGroup>
 
 </Project>
