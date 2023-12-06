@@ -48,5 +48,6 @@ namespace CurrentAccount.Core.CurrentAccount
 		public RecordedDateValue? ClosingDate { get; private set; }
 
 		public void SetAccountNumber(AccountNumberValue accountNumber) { AccountNumber = accountNumber; } 
+		public void SetAccoutUuid (Guid id) { AccountId = id; }
 	}
 }

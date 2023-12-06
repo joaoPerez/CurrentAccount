@@ -59,22 +59,18 @@ namespace CurrentAccount.Application.CurrentAccount.Handlers
 
             currentAccountModified.SetAccountNumber(accountNumberValue.Value);
 
-            // Set the new CustomerId
-            var newAccountUuid = Guid.NewGuid();
-            currentAccountModified.Customer.SetCustomerId(newAccountUuid);
-
             // Create account
-            var customerId = await _currentAccountService.CreateCurrentAccount(currentAccountModified);
+            var accountId = await _currentAccountService.CreateCurrentAccount(currentAccountModified);
 
             if(command.InitialCredit >  0)
             {
-                var transactionCommand = new CreateTransactionCommand(currentAccountModified.AccountId, "Credit", 
+                var transactionCommand = new CreateTransactionCommand(accountId, "Credit", 
                     command.InitialCredit, "Initial credit", currentAccountModified.Currency.Currency);
 
                 await _createTransactionHandler.HandleTransactionEvent(transactionCommand);
 			}
 
-            return ResultModel<Guid>.Success(customerId);
+            return ResultModel<Guid>.Success(accountId);
         }
     }
 }
