@@ -9,10 +9,10 @@ namespace CurrentAccount.Transaction.Infrastructure.Databases.Repository
 {
 	public class TransactionRepository : ITransactionRepository
 	{
-		private readonly TransactionContext _dbContext;
+		private readonly TransactionDbContext _dbContext;
 		private readonly ITransactionInfraFactory _transactionInfraFactory;
 
-		public TransactionRepository(ITransactionInfraFactory transactionInfraFactory, TransactionContext transactionContext)
+		public TransactionRepository(ITransactionInfraFactory transactionInfraFactory, TransactionDbContext transactionContext)
         {
             _dbContext = transactionContext;
 			_transactionInfraFactory = transactionInfraFactory;

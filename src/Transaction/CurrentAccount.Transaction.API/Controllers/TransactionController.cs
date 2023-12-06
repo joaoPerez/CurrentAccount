@@ -1,4 +1,4 @@
-﻿using CurrentAccount.Transaction.Application.Transactions.Commands;
+﻿using CurrentAccount.Core.Shared.Transactions.Commands;
 using CurrentAccount.Transaction.Application.Transactions.Handlers;
 using CurrentAccount.Transaction.Core.Transactions;
 using Microsoft.AspNetCore.Mvc;

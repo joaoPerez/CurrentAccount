@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\EventBus\EventBus.Messages\EventBus.Messages.csproj" />
     <ProjectReference Include="..\CurrentAccount.Core\CurrentAccount.Core.csproj" />
   </ItemGroup>
 

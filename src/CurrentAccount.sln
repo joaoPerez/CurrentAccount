@@ -19,19 +19,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CurrentAccount", "CurrentAc
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transaction", "Transaction", "{708C88CF-2BF7-4C20-A429-E6412A1BD939}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrentAccount.Transaction.API", "Transaction\CurrentAccount.Transaction.API\CurrentAccount.Transaction.API.csproj", "{10DD2467-0BD3-43A6-9649-7EEBBD6D0D84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrentAccount.Transaction.API", "Transaction\CurrentAccount.Transaction.API\CurrentAccount.Transaction.API.csproj", "{10DD2467-0BD3-43A6-9649-7EEBBD6D0D84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrentAccount.Transaction.Core", "Transaction\CurrentAccount.Transaction.Core\CurrentAccount.Transaction.Core.csproj", "{3FC51164-FC69-4805-9F70-06AC034B2DED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrentAccount.Transaction.Core", "Transaction\CurrentAccount.Transaction.Core\CurrentAccount.Transaction.Core.csproj", "{3FC51164-FC69-4805-9F70-06AC034B2DED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrentAccount.Transaction.Application", "Transaction\CurrentAccount.Transaction.Application\CurrentAccount.Transaction.Application.csproj", "{3555F18A-B869-4EB2-9300-12E810A7255C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrentAccount.Transaction.Application", "Transaction\CurrentAccount.Transaction.Application\CurrentAccount.Transaction.Application.csproj", "{3555F18A-B869-4EB2-9300-12E810A7255C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrentAccount.Transaction.Infrastructure", "Transaction\CurrentAccount.Transaction.Infrastructure\CurrentAccount.Transaction.Infrastructure.csproj", "{4F072818-2FAE-4D28-80A0-DD0D38C8BEAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrentAccount.Transaction.Infrastructure", "Transaction\CurrentAccount.Transaction.Infrastructure\CurrentAccount.Transaction.Infrastructure.csproj", "{4F072818-2FAE-4D28-80A0-DD0D38C8BEAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrentAccount.Transaction.UnitTests", "Transaction\CurrentAccount.Transaction.UnitTests\CurrentAccount.Transaction.UnitTests.csproj", "{6FC6EF2E-B16C-42E5-8F3D-8C07F73ADDF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrentAccount.Transaction.UnitTests", "Transaction\CurrentAccount.Transaction.UnitTests\CurrentAccount.Transaction.UnitTests.csproj", "{6FC6EF2E-B16C-42E5-8F3D-8C07F73ADDF5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{1576E8B0-EB58-4CB2-B863-42A7DD12AFB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrentAccount.Core.Shared", "Shared\CurrentAccount.Core.Shared\CurrentAccount.Core.Shared.csproj", "{B848C4A7-1574-4112-8B39-14C718D67432}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrentAccount.Core.Shared", "Shared\CurrentAccount.Core.Shared\CurrentAccount.Core.Shared.csproj", "{B848C4A7-1574-4112-8B39-14C718D67432}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{9D3EC27E-577F-47CF-8251-3A29DF387677}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "EventBus\EventBus.Messages\EventBus.Messages.csproj", "{EC2F2D6E-407A-4B93-B7D1-5D99CA8AB82F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +91,10 @@ Global
 		{B848C4A7-1574-4112-8B39-14C718D67432}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B848C4A7-1574-4112-8B39-14C718D67432}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B848C4A7-1574-4112-8B39-14C718D67432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC2F2D6E-407A-4B93-B7D1-5D99CA8AB82F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC2F2D6E-407A-4B93-B7D1-5D99CA8AB82F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC2F2D6E-407A-4B93-B7D1-5D99CA8AB82F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC2F2D6E-407A-4B93-B7D1-5D99CA8AB82F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +111,7 @@ Global
 		{4F072818-2FAE-4D28-80A0-DD0D38C8BEAB} = {708C88CF-2BF7-4C20-A429-E6412A1BD939}
 		{6FC6EF2E-B16C-42E5-8F3D-8C07F73ADDF5} = {708C88CF-2BF7-4C20-A429-E6412A1BD939}
 		{B848C4A7-1574-4112-8B39-14C718D67432} = {1576E8B0-EB58-4CB2-B863-42A7DD12AFB5}
+		{EC2F2D6E-407A-4B93-B7D1-5D99CA8AB82F} = {9D3EC27E-577F-47CF-8251-3A29DF387677}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {24BD2E9B-432D-4C25-8F50-BE37AE280835}

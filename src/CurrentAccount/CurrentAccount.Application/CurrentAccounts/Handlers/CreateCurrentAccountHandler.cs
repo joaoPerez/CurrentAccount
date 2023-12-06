@@ -1,8 +1,10 @@
 ﻿using CurrentAccount.Application.CurrentAccounts.Commands;
+using CurrentAccount.Application.Transactions;
 using CurrentAccount.Core.CurrentAccount;
 using CurrentAccount.Core.Customer;
 using CurrentAccount.Core.Shared;
 using CurrentAccount.Core.Shared.Result;
+using CurrentAccount.Core.Shared.Transactions.Commands;
 
 namespace CurrentAccount.Application.CurrentAccount.Handlers
 {
@@ -13,11 +15,15 @@ namespace CurrentAccount.Application.CurrentAccount.Handlers
 
         private readonly ICustomerService _customerService;
         private readonly ICurrentAccountService _currentAccountService;
+        private readonly ICreateTransactionHandler _createTransactionHandler;
 
-        public CreateCurrentAccountHandler(ICustomerService customerService, ICurrentAccountService currentAccountService)
+		public CreateCurrentAccountHandler(ICustomerService customerService, 
+                                           ICurrentAccountService currentAccountService,
+                                           ICreateTransactionHandler createTransactionHandler)
         {
             _customerService = customerService;
             _currentAccountService = currentAccountService;
+            _createTransactionHandler = createTransactionHandler;
         }
 
         public async Task<ResultModel<Guid>> HandleExistentCustomer(CreateCurrentAccountCommand command)
@@ -59,6 +65,14 @@ namespace CurrentAccount.Application.CurrentAccount.Handlers
 
             // Create account
             var customerId = await _currentAccountService.CreateCurrentAccount(currentAccountModified);
+
+            if(command.InitialCredit >  0)
+            {
+                var transactionCommand = new CreateTransactionCommand(currentAccountModified.AccountId, "Credit", 
+                    command.InitialCredit, "Initial credit", currentAccountModified.Currency.Currency);
+
+                await _createTransactionHandler.HandleTransactionEvent(transactionCommand);
+			}
 
             return ResultModel<Guid>.Success(customerId);
         }

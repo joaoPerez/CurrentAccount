@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.1.2" />
+    <ProjectReference Include="..\..\EventBus\EventBus.Messages\EventBus.Messages.csproj" />
     <ProjectReference Include="..\CurrentAccount.Transaction.Core\CurrentAccount.Transaction.Core.csproj" />
   </ItemGroup>
 

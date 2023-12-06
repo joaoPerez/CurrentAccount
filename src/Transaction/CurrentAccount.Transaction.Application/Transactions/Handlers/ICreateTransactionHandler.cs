@@ -1,5 +1,5 @@
 ﻿using CurrentAccount.Core.Shared.Result;
-using CurrentAccount.Transaction.Application.Transactions.Commands;
+using CurrentAccount.Core.Shared.Transactions.Commands;
 
 namespace CurrentAccount.Transaction.Application.Transactions.Handlers
 {

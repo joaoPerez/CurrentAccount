@@ -1,10 +1,12 @@
 using CurrentAccount.Application.CurrentAccount.Handlers;
 using CurrentAccount.Application.CurrentAccount.Services;
 using CurrentAccount.Application.Customer;
+using CurrentAccount.Application.Transactions;
 using CurrentAccount.Core.CurrentAccount;
 using CurrentAccount.Core.Customer;
 using CurrentAccount.Infrastructure.Database.Context;
 using CurrentAccount.Infrastructure.Database.Repository;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +15,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Configuring database in memory
+builder.Services.AddDbContext<CurrentAccountContext>(options =>
+		options.UseInMemoryDatabase(databaseName: "CurrentAccountInMemoryDB"));
+
+// Configuring Masstransit with RabbitMq
+builder.Services.AddMassTransit(config =>
+{
+	config.UsingRabbitMq((context, cfg) =>
+	{
+		cfg.ConfigureEndpoints(context);
+	});
+});
+
 builder.Services.AddScoped<ICurrentAccountInfraFactory, CurrentAccountInfraFactory>();
+builder.Services.AddScoped<ICreateTransactionHandler, CreateTransactionHandler>();
 builder.Services.AddScoped<ICreateCurrentAccountHandler, CreateCurrentAccountHandler>();
 builder.Services.AddScoped<ICurrentAccountRepository, CurrentAccountRepository>();
 builder.Services.AddScoped<ICurrentAccountService, CurrentAccountService>();
@@ -32,9 +48,6 @@ builder.Services.AddCors(options =>
 						  .AllowAnyHeader()
 						  .AllowAnyMethod());
 });
-
-builder.Services.AddDbContext<CurrentAccountContext>(options =>
-		options.UseInMemoryDatabase(databaseName: "CurrentAccountInMemoryDB"));
 
 var app = builder.Build();
 

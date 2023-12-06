@@ -1,6 +1,6 @@
 ﻿using CurrentAccount.Core.Shared;
 using CurrentAccount.Core.Shared.Result;
-using CurrentAccount.Transaction.Application.Transactions.Commands;
+using CurrentAccount.Core.Shared.Transactions.Commands;
 using CurrentAccount.Transaction.Core.Transactions;
 
 namespace CurrentAccount.Transaction.Application.Transactions.Handlers

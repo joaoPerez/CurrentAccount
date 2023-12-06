@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CurrentAccount.Transaction.Infrastructure.Databases.Contexts
 {
-	public class TransactionContext : DbContext
+	public class TransactionDbContext : DbContext
 	{
-		public TransactionContext(DbContextOptions<TransactionContext> options)
+		public TransactionDbContext(DbContextOptions<TransactionDbContext> options)
 		: base(options)
 		{
 		}

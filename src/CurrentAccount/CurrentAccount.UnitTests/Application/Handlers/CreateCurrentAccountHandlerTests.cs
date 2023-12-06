@@ -6,6 +6,7 @@ using CurrentAccount.Infrastructure.Database.Models;
 using Moq;
 using CurrentAccount.Core.Shared.Result;
 using CurrentAccount.Application.CurrentAccounts.Commands;
+using CurrentAccount.Application.Transactions;
 
 namespace CurrentAccount.UnitTests.Application.Handlers
 {
@@ -16,14 +17,15 @@ namespace CurrentAccount.UnitTests.Application.Handlers
 		private readonly Mock<ICurrentAccountService> _currentAccountServiceMock;
 
 		private readonly ICreateCurrentAccountHandler _createCurrentAccountHandler;
-
+		private readonly Mock<ICreateTransactionHandler> _createTransactionHandlerMock;
 		public CreateCurrentAccountHandlerTests()
         {
 			_currentAccountInfraFactory = new CurrentAccountInfraFactory();
 			_customerServiceMock = new Mock<ICustomerService>();
 			_currentAccountServiceMock = new Mock<ICurrentAccountService>();
+			_createTransactionHandlerMock = new Mock<ICreateTransactionHandler>();
 
-			_createCurrentAccountHandler = new CreateCurrentAccountHandler(_customerServiceMock.Object, _currentAccountServiceMock.Object);
+			_createCurrentAccountHandler = new CreateCurrentAccountHandler(_customerServiceMock.Object, _currentAccountServiceMock.Object, _createTransactionHandlerMock.Object);
 		}
 
 		[Fact]
