@@ -35,7 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrentAccount.Core.Shared"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{9D3EC27E-577F-47CF-8251-3A29DF387677}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "EventBus\EventBus.Messages\EventBus.Messages.csproj", "{EC2F2D6E-407A-4B93-B7D1-5D99CA8AB82F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Messages", "EventBus\EventBus.Messages\EventBus.Messages.csproj", "{EC2F2D6E-407A-4B93-B7D1-5D99CA8AB82F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrentAccount.Transaction.Grpc", "Transaction\CurrentAccount.Transaction.Grpc\CurrentAccount.Transaction.Grpc.csproj", "{0BAD0B63-3E0B-411F-993F-1C88EF9637B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,10 @@ Global
 		{EC2F2D6E-407A-4B93-B7D1-5D99CA8AB82F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC2F2D6E-407A-4B93-B7D1-5D99CA8AB82F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC2F2D6E-407A-4B93-B7D1-5D99CA8AB82F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BAD0B63-3E0B-411F-993F-1C88EF9637B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BAD0B63-3E0B-411F-993F-1C88EF9637B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BAD0B63-3E0B-411F-993F-1C88EF9637B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BAD0B63-3E0B-411F-993F-1C88EF9637B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +118,7 @@ Global
 		{6FC6EF2E-B16C-42E5-8F3D-8C07F73ADDF5} = {708C88CF-2BF7-4C20-A429-E6412A1BD939}
 		{B848C4A7-1574-4112-8B39-14C718D67432} = {1576E8B0-EB58-4CB2-B863-42A7DD12AFB5}
 		{EC2F2D6E-407A-4B93-B7D1-5D99CA8AB82F} = {9D3EC27E-577F-47CF-8251-3A29DF387677}
+		{0BAD0B63-3E0B-411F-993F-1C88EF9637B3} = {708C88CF-2BF7-4C20-A429-E6412A1BD939}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {24BD2E9B-432D-4C25-8F50-BE37AE280835}

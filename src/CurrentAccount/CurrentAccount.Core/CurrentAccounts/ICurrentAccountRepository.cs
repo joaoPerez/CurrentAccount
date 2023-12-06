@@ -8,5 +8,6 @@ namespace CurrentAccount.Core.CurrentAccount
 		Task<Guid> CreateCurrentAccount(CurrentAccountEntity currentAccountEntity);
 		Task<string> GetLastCreatedAccountNumber();
 		Task<ResultModel<CurrentAccountEntity>> GetLastActiveAccountFromCustomer(CustomerEntity customer);
+		Task<List<Guid>> GetCurrentAccountsFromCustomer(Guid customerId);
 	}
 }

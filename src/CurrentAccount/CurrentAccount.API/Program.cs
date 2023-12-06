@@ -1,5 +1,6 @@
 using CurrentAccount.Application.CurrentAccount.Handlers;
 using CurrentAccount.Application.CurrentAccount.Services;
+using CurrentAccount.Application.CurrentAccounts.Handlers;
 using CurrentAccount.Application.Customer;
 using CurrentAccount.Application.Transactions;
 using CurrentAccount.Core.CurrentAccount;
@@ -30,6 +31,7 @@ builder.Services.AddMassTransit(config =>
 
 builder.Services.AddScoped<ICurrentAccountInfraFactory, CurrentAccountInfraFactory>();
 builder.Services.AddScoped<ICreateTransactionHandler, CreateTransactionHandler>();
+builder.Services.AddScoped<ICustomerFullStatementHandler, CustomerFullStatementHandler>();
 builder.Services.AddScoped<ICreateCurrentAccountHandler, CreateCurrentAccountHandler>();
 builder.Services.AddScoped<ICurrentAccountRepository, CurrentAccountRepository>();
 builder.Services.AddScoped<ICurrentAccountService, CurrentAccountService>();

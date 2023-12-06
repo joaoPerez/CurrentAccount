@@ -44,6 +44,11 @@ namespace CurrentAccount.Infrastructure.Database.Repository
 			return Task.FromResult(accountUuid);
 		}
 
+		public Task<List<Guid>> GetCurrentAccountsFromCustomer(Guid customerId)
+		{
+			return _dbContext.CurrentAccounts.Where(x => x.Customer.CustomerId.Equals(customerId)).Select(x => x.Id).ToListAsync();
+		}
+
 		public Task<ResultModel<CurrentAccountEntity>> GetLastActiveAccountFromCustomer(CustomerEntity customer)
 		{
 			var currentAccount = _dbContext.CurrentAccounts

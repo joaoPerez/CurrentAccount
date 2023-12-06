@@ -37,6 +37,11 @@ namespace CurrentAccount.Application.CurrentAccount.Services
             return _currentAccountRepository.GetLastActiveAccountFromCustomer(customer);
         }
 
+        public Task<List<Guid>> GetCurrentAccountsFromCustomer(Guid customerId)
+        {
+            return _currentAccountRepository.GetCurrentAccountsFromCustomer(customerId);
+        }
+
         private Task<string> GetLastCreatedAccountNumberOfAllClients()
         {
             return _currentAccountRepository.GetLastCreatedAccountNumber();
