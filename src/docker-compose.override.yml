@@ -15,12 +15,13 @@ services:
     ports:
       - "8000:80"
 
-  currentaccount.transaction.api:
-    container_name: currentaccount.transaction.api
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "8001:80"
+ # currentaccount.transaction.api:
+ #   container_name: currentaccount.transaction.api
+ #   environment:
+ #     - ASPNETCORE_ENVIRONMENT=Development
+ #   ports:
+ #     - "8001:80"
+
   currentaccount.transaction.grpc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development

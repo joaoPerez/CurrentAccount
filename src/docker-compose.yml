@@ -3,16 +3,18 @@ version: '3.4'
 services:
   rabbitmq:
     image: masstransit/rabbitmq
+
   currentaccount.api:
     image: ${DOCKER_REGISTRY-}currentaccountapi
     build:
       context: .
       dockerfile: CurrentAccount/CurrentAccount.API/Dockerfile
-  currentaccount.transaction.api:
-    image: ${DOCKER_REGISTRY-}currentaccounttransactionapi
-    build:
-      context: .
-      dockerfile: Transaction/CurrentAccount.Transaction.API/Dockerfile
+
+  #currentaccount.transaction.api:
+  #  image: ${DOCKER_REGISTRY-}currentaccounttransactionapi
+  #  build:
+  #    context: .
+  #   dockerfile: Transaction/CurrentAccount.Transaction.API/Dockerfile
 
   currentaccount.transaction.grpc:
     image: ${DOCKER_REGISTRY-}currentaccounttransactiongrpc
