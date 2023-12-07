@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Current Account</title>
+    <style>
+        /* Your existing CSS styles */
+    </style>
+</head>
+<body>
+    <h2>Create Current Account</h2>
+    <label for="customerId">Customer ID:</label>
+    <input type="text" id="customerId" placeholder="Enter Customer ID">
+
+    <label for="initialCredit">Initial Credit:</label>
+    <input type="number" id="initialCredit" placeholder="Enter Initial Credit">
+
+    <button onclick="createAccount()">Create Account</button>
+
+    <div id="response"></div>
+    <br>
+	<br>
+    <!-- New field and button for GetCustomerFullStatement -->
+    <label for="customerStatementId">Customer Statement ID:</label>
+    <input type="text" id="customerStatementId" placeholder="Enter Customer Statement ID">
+
+    <button onclick="getCustomerFullStatement()">Get Customer Full Statement</button>
+
+    <div id="statementResponse"></div>
+
+    <script>
+        async function createAccount() {
+            const customerId = document.getElementById('customerId').value;
+            const initialCredit = document.getElementById('initialCredit').value;
+
+            const responseDiv = document.getElementById('response');
+            responseDiv.innerHTML = ''; // Clear previous response
+
+            try {
+                const response = await fetch('http://localhost:8000/CurrentAccount/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        CustomerId: customerId,
+                        InitialCredit: parseFloat(initialCredit), // Convert to a floating-point number
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const result = await response.text();
+                responseDiv.innerHTML = `<p>Account created successfully. Account ID: ${result}</p>`;
+            } catch (error) {
+                responseDiv.innerHTML = `<p>Error creating account: ${error.message}</p>`;
+            }
+        }
+
+    async function getCustomerFullStatement() {
+        const customerStatementId = document.getElementById('customerStatementId').value;
+
+        const statementResponseDiv = document.getElementById('statementResponse');
+        statementResponseDiv.innerHTML = ''; // Clear previous response
+
+        try {
+            const response = await fetch(`http://localhost:8000/CurrentAccount/customerFullStatement?customerId=${customerStatementId}`);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            
+            // Display customer information
+            statementResponseDiv.innerHTML = `
+                <p>Name: ${result.name}</p>
+                <p>Surname: ${result.surname}</p>
+                <p>Balance: ${result.balance}</p>
+            `;
+
+            // Display transactions
+            if (result.transactions && result.transactions.length > 0) {
+                statementResponseDiv.innerHTML += '<h3>Transactions:</h3>';
+                statementResponseDiv.innerHTML += '<ul>';
+                
+                result.transactions.forEach(transaction => {
+                    statementResponseDiv.innerHTML += `
+                        <li>
+                            <p>Transaction ID: ${transaction.transactionId}</p>
+                            <p>Account ID: ${transaction.accountId}</p>
+                            <p>Date: ${transaction.transactionDate}</p>
+                            <p>Type: ${transaction.type}</p>
+                            <p>Amount: ${transaction.amount}</p>
+                            <p>Description: ${transaction.description}</p>
+                            <p>Actual Balance: ${transaction.actualBalance}</p>
+                            <p>Currency: ${transaction.currency}</p>
+                        </li>
+                    `;
+                });
+
+                statementResponseDiv.innerHTML += '</ul>';
+            }
+        } catch (error) {
+            statementResponseDiv.innerHTML = `<p>Error getting customer statement: ${error.message}</p>`;
+        }
+    }
+    </script>
+</body>
+</html>
