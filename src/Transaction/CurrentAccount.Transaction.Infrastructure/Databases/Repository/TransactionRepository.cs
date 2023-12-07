@@ -66,6 +66,7 @@ namespace CurrentAccount.Transaction.Infrastructure.Databases.Repository
 		{
 			var lastBalance = await _dbContext.Transactions
 				.OrderByDescending(x => x.TransactionDate)
+				.Where(x => x.CurrentAccountId.Equals(accountId))
 				.Select(x => new { x.ActualBalance })
 				.FirstOrDefaultAsync();
 
