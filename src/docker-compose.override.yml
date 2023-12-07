@@ -21,3 +21,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "8001:80"
+  currentaccount.transaction.grpc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8002:80"

@@ -3,6 +3,6 @@
 	public record CustomerFullStatementResponseModel(string Name, 
 													 string Surname, 
 													 decimal Balance,
-													 List<TransactionEntityResponseModel> Transactions
+													 List<TransactionResponseModel> Transactions
 													 );
 }

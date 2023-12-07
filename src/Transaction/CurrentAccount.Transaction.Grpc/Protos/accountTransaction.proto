@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option csharp_namespace = "CurrentAccount.Transaction.Grpc.Protos";
+
+service AccountTransactionGrpcService {
+    rpc GetTransactions (AccountRequest) returns (TransactionListResponse);
+}
+
+message AccountRequest {
+    string accountId = 1;
+}
+
+// Using double for this example, in the real world we can use two parameters to represent a decimal.
+message TransactionResponse {
+    string transactionId = 1;
+    string accountId = 2;
+    string transactionDate = 3;
+    string type = 4;
+    double  amount = 5;
+    string description = 6;
+    double  actualBalance = 7;
+    string currency = 8;
+}
+
+message TransactionListResponse {
+    repeated TransactionResponse transactions = 1;
+}

@@ -6,12 +6,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.21.5" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.49.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.49.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MassTransit" Version="8.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\EventBus\EventBus.Messages\EventBus.Messages.csproj" />
     <ProjectReference Include="..\CurrentAccount.Core\CurrentAccount.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\..\Transaction\CurrentAccount.Transaction.Grpc\Protos\accountTransaction.proto" GrpcServices="Client">
+      <Link>Protos\accountTransaction.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using CurrentAccount.Application.CurrentAccounts.Response;
+using CurrentAccount.Application.Transactions;
 using CurrentAccount.Core.CurrentAccount;
 using CurrentAccount.Core.Customer;
 using CurrentAccount.Core.Shared.Result;
@@ -14,14 +15,16 @@ namespace CurrentAccount.Application.CurrentAccounts.Handlers
 	{
 		private readonly ICurrentAccountService _currentAccountService;
 		private readonly ICustomerService _customerService;
+		private readonly ITransactionFromAccountGrpcService _transactionFromAccountGrpcService;
 
 		private readonly string _findCustomerErrorMessage = "Customer not found";
 		private readonly string _findAccountsErrorMessage = "No accounts found";
 
-		public CustomerFullStatementHandler(ICurrentAccountService currentAccountService, ICustomerService customerService)
+		public CustomerFullStatementHandler(ITransactionFromAccountGrpcService transactionFromAccountGrpcService, ICurrentAccountService currentAccountService, ICustomerService customerService)
 		{
 			_currentAccountService = currentAccountService;
 			_customerService = customerService;
+			_transactionFromAccountGrpcService = transactionFromAccountGrpcService;
 		}
 
 		public async Task<ResultModel<CustomerFullStatementResponseModel>> HandleCustomerFullStatement(Guid customerId)
@@ -40,20 +43,18 @@ namespace CurrentAccount.Application.CurrentAccounts.Handlers
 				ResultModel<CustomerFullStatementResponseModel>.Failure(_findAccountsErrorMessage);
 			}
 
-			var transactions = new List<TransactionEntityResponseModel>(currentAccounts.Count);
+			var transactions = new List<TransactionResponseModel>(currentAccounts.Count);
 
 			foreach (var account in currentAccounts)
 			{
-				var transaction = new TransactionEntityResponseModel(Guid.NewGuid(),
-																	 Guid.NewGuid(),
-																	 DateTime.Now,
-																	 "Credit",
-																	 10,
-																	 "test",
-																	 30,
-																	 "USD");
+				var transactionsResult = await _transactionFromAccountGrpcService.GetTransactionsFromAccount(account);
 
-				transactions.Add(transaction);
+				if(!transactionsResult.IsSuccess)
+				{
+					return ResultModel<CustomerFullStatementResponseModel>.Failure(transactionsResult.ErrorMessage);
+				}
+
+				transactions.AddRange(transactionsResult.Value);
 			}
 
 			decimal balance = 0;

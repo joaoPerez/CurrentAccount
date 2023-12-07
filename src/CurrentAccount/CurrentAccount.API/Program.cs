@@ -7,6 +7,7 @@ using CurrentAccount.Core.CurrentAccount;
 using CurrentAccount.Core.Customer;
 using CurrentAccount.Infrastructure.Database.Context;
 using CurrentAccount.Infrastructure.Database.Repository;
+using CurrentAccount.Transaction.Grpc.Protos;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +30,11 @@ builder.Services.AddMassTransit(config =>
 	});
 });
 
+var accountTransactionUrl = builder.Configuration["GrpcSettings:TransactionUrl"];
+
+builder.Services.AddGrpcClient<AccountTransactionGrpcService.AccountTransactionGrpcServiceClient>
+	(x => x.Address = new Uri(accountTransactionUrl));
+builder.Services.AddScoped<ITransactionFromAccountGrpcService, TransactionFromAccountGrpcService>();
 builder.Services.AddScoped<ICurrentAccountInfraFactory, CurrentAccountInfraFactory>();
 builder.Services.AddScoped<ICreateTransactionHandler, CreateTransactionHandler>();
 builder.Services.AddScoped<ICustomerFullStatementHandler, CustomerFullStatementHandler>();

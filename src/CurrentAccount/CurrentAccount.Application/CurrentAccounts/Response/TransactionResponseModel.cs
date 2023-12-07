@@ -1,6 +1,6 @@
 ﻿namespace CurrentAccount.Application.CurrentAccounts.Response
 {
-	public record TransactionEntityResponseModel(Guid TransactionId, 
+	public record TransactionResponseModel(Guid TransactionId, 
 											     Guid AccountId, 
 												 DateTime TransactionDate, 
 												 string Type, 
